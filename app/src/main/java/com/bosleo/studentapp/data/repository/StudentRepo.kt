@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
 
-    suspend fun getClassData() : ApiResponse?
+    suspend fun getClassData()
     {
         try {
             val apiService: ApiService = RetrofitBuilder.getRetrofit().create(ApiService::class.java)
@@ -20,17 +20,17 @@ class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
             if(res.isSuccessful)
             {
                 res.body()?.let {
-                    return it
+
                 }
             }
         }
         catch (e : Exception)
         {
             e.printStackTrace()
-            return null
+            //return null
         }
 
-        return null
+        //return null
     }
 
     fun getAllStudents(): LiveData<MutableList<Student>> {
