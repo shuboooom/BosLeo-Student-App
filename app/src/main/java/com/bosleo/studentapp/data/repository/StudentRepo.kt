@@ -1,13 +1,16 @@
 package com.bosleo.studentapp.data.repository
 
+import androidx.lifecycle.LiveData
 import com.bosleo.studentapp.api.ApiService
 import com.bosleo.studentapp.api.RetrofitBuilder
+import com.bosleo.studentapp.data.database.StudentDao
 import com.bosleo.studentapp.data.pojo.ApiResponse
+import com.bosleo.studentapp.data.pojo.Student
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import javax.inject.Inject
 
-@InstallIn(ActivityComponent::class)
-class StudentRepo {
+class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
 
     suspend fun getClassData() : ApiResponse?
     {
@@ -30,9 +33,8 @@ class StudentRepo {
         return null
     }
 
-    fun getAllStudents()
-    {
-
+    fun getAllStudents(): LiveData<MutableList<Student>> {
+        return studentDao.fetch()
     }
 
 }
