@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.bosleo.studentapp.data.pojo.Divison
 import com.bosleo.studentapp.data.pojo.Student
 
-@Database(entities = [Student::class],
+@Database(entities = [Student::class,Divison::class],
     version = 1, exportSchema = false)
 
 abstract class StudentDatabase : RoomDatabase() {

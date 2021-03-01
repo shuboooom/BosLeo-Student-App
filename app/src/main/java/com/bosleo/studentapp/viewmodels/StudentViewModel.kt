@@ -11,9 +11,19 @@ import javax.inject.Inject
 class StudentViewModel @Inject constructor (private val studentRepo: StudentRepo) : ViewModel() {
 
     val allStudents = studentRepo.getAllStudents()
+    val selectedStudents = studentRepo.getSelectedStudents()
+
+    init {
+        viewModelScope.launch { studentRepo.uncheckAll() }
+    }
 
     fun fetchData()
     {
         viewModelScope.launch { studentRepo.getClassData() }
+    }
+
+    fun checkUncheck(student_id : String,value : Boolean)
+    {
+        viewModelScope.launch { studentRepo.checkUncheck(student_id,value) }
     }
 }

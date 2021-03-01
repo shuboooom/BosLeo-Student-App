@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import com.bosleo.studentapp.api.ApiService
 import com.bosleo.studentapp.api.RetrofitBuilder
 import com.bosleo.studentapp.data.database.StudentDao
-import com.bosleo.studentapp.data.pojo.ApiResponse
+import com.bosleo.studentapp.data.pojo.Divison
 import com.bosleo.studentapp.data.pojo.Student
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import javax.inject.Inject
 
 class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
@@ -21,6 +19,14 @@ class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
             {
                 res.body()?.let {
 
+                    divisions ->
+                    val students = mutableListOf<Student>()
+                    divisions.forEach {
+                        students.addAll(it.students)
+                    }
+
+                    insertAllDivision(divisions)
+                    insertAllStudents(students)
                 }
             }
         }
@@ -33,8 +39,28 @@ class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
         //return null
     }
 
-    fun getAllStudents(): LiveData<MutableList<Student>> {
+    fun getAllStudents(): LiveData<List<Student>> {
         return studentDao.fetch()
+    }
+
+    fun getSelectedStudents(): LiveData<List<Student>> {
+        return studentDao.fetchOnlySelected()
+    }
+
+    private suspend fun insertAllDivision(divisons : List<Divison>) {
+        return studentDao.insertAllDivision(divisons)
+    }
+
+    private suspend fun insertAllStudents(students : List<Student>) {
+        return studentDao.insertAllStudents(students)
+    }
+
+    suspend fun checkUncheck(student_id : String,value : Boolean) {
+        return studentDao.checkUnCheck(student_id,if(value){"1"}else{"0"})
+    }
+
+    suspend fun uncheckAll() {
+        return studentDao.uncheckAll()
     }
 
 }
