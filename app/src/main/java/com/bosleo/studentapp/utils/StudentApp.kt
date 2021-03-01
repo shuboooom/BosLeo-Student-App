@@ -13,8 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @HiltAndroidApp
-class StudentApp : Application() {
-}
+class StudentApp : Application()
 
 @InstallIn(SingletonComponent::class)
 @Module

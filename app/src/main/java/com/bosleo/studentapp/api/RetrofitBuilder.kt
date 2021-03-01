@@ -1,7 +1,8 @@
 package com.bosleo.studentapp.api
 
 
-import biz.ctunes.callingtunes.Constants
+import com.bosleo.studentapp.utils.Constants
+import com.bosleo.studentapp.BuildConfig
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,13 +13,12 @@ object RetrofitBuilder {
 
 
     private val interceptor = HttpLoggingInterceptor().apply {
-//        level = if(BuildConfig.Debug) {
-//            HttpLoggingInterceptor.Level.BODY
-//        } else{
-//            //don't log for production apps!
-//            HttpLoggingInterceptor.Level.NONE
-//        }
-        level = HttpLoggingInterceptor.Level.BODY
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            //don't log for production apps!
+            HttpLoggingInterceptor.Level.NONE
+        }
     }
 
     fun getRetrofit(baseURL : String = Constants.baseUrl): Retrofit {

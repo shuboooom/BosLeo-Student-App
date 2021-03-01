@@ -1,12 +1,7 @@
 package com.bosleo.studentapp.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bosleo.studentapp.R
@@ -17,7 +12,7 @@ import com.bosleo.studentapp.databinding.ItemStudentBinding
 class StudentAdapter(var list: ArrayList<Student>, private val onItemClick: ((Student) -> Unit))
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun updateList(ctunesList: ArrayList<Student>) {
+    fun updateList(newlist: ArrayList<Student>) {
 
 
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -26,22 +21,22 @@ class StudentAdapter(var list: ArrayList<Student>, private val onItemClick: ((St
             }
 
             override fun getNewListSize(): Int {
-                return ctunesList.size
+                return newlist.size
             }
 
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                     val oldCtune = list[oldItemPosition]
-                    val newCtune = ctunesList[newItemPosition]
+                    val newCtune = newlist[newItemPosition]
                     return oldCtune.id == newCtune.id
 
             }
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return list[oldItemPosition] == ctunesList[newItemPosition]
+                return list[oldItemPosition] == newlist[newItemPosition]
             }
         })
 
-        list = ctunesList
+        list = newlist
 
         diffResult.dispatchUpdatesTo(this)
 
@@ -62,7 +57,7 @@ class StudentAdapter(var list: ArrayList<Student>, private val onItemClick: ((St
 
         val holder = MyViewHolder(
             ItemStudentBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
+                LayoutInflater.from(parent.context),
                 parent, false
             )
         )

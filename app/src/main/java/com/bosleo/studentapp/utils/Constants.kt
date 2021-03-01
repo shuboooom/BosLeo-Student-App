@@ -1,4 +1,4 @@
-package biz.ctunes.callingtunes
+package com.bosleo.studentapp.utils
 
 
 class Constants

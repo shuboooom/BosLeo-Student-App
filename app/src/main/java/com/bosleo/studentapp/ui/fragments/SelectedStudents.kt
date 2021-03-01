@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bosleo.studentapp.databinding.FragmentStudentsBinding
 import com.bosleo.studentapp.ui.adapters.SelectedStudentAdapter
-import com.bosleo.studentapp.ui.adapters.StudentAdapter
 import com.bosleo.studentapp.utils.beGone
 import com.bosleo.studentapp.utils.beVisible
 import com.bosleo.studentapp.viewmodels.StudentViewModel

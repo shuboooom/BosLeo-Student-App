@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bosleo.studentapp.data.pojo.Student
 import com.bosleo.studentapp.databinding.FragmentStudentsBinding
 import com.bosleo.studentapp.ui.adapters.StudentAdapter
 import com.bosleo.studentapp.utils.beGone
