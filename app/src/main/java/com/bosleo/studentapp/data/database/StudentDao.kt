@@ -17,6 +17,9 @@ interface StudentDao{
     @Query("select * From student left join divison on (divison.division_id  = student.clasId )")
     fun  fetch() : LiveData<List<Student>>
 
+    @Query("select * From divison")
+    fun  fetchDivison() : LiveData<List<DivisonWithStudents>>
+
     @Query("select * From student left join divison on (divison.division_id  = student.clasId ) where isSelected = 1")
     fun  fetchOnlySelected() : LiveData<List<Student>>
 

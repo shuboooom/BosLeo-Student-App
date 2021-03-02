@@ -11,5 +11,4 @@ data class Student(
     var name: String = "",
     var roll_number: Int = 0,
     var isSelected: Boolean = false,
-    @Embedded var divison: DivisonInfo = DivisonInfo()
 )

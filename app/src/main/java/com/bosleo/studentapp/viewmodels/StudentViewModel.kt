@@ -11,6 +11,7 @@ import javax.inject.Inject
 class StudentViewModel @Inject constructor (private val studentRepo: StudentRepo) : ViewModel() {
 
     val allStudents = studentRepo.getAllStudents()
+    val allDivisons = studentRepo.getAllDivisions()
     val selectedStudents = studentRepo.getSelectedStudents()
 
     init {

@@ -2,17 +2,24 @@ package com.bosleo.studentapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bosleo.studentapp.R
+import com.bosleo.studentapp.data.database.DivisonWithStudents
+import com.bosleo.studentapp.data.pojo.Divison
 import com.bosleo.studentapp.data.pojo.Student
+import com.bosleo.studentapp.databinding.ItemDivisonBinding
 import com.bosleo.studentapp.databinding.ItemStudentBinding
 
 
-class StudentAdapter(var list: List<Student>, private val onItemClick: ((Student) -> Unit))
+class DivisonAdapter(var list: List<DivisonWithStudents>, private val onItemClick: ((Student) -> Unit))
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun updateList(newlist: ArrayList<Student>) {
+    private val viewPool = RecyclerView.RecycledViewPool()
+
+    fun updateList(newlist: List<DivisonWithStudents>) {
 
 
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -27,7 +34,7 @@ class StudentAdapter(var list: List<Student>, private val onItemClick: ((Student
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                     val oldCtune = list[oldItemPosition]
                     val newCtune = newlist[newItemPosition]
-                    return oldCtune.id == newCtune.id
+                    return oldCtune.divison.id == newCtune.divison.id
 
             }
 
@@ -44,8 +51,8 @@ class StudentAdapter(var list: List<Student>, private val onItemClick: ((Student
 
 
 
-    class MyViewHolder(itemStudentBinding: ItemStudentBinding) : RecyclerView.ViewHolder(itemStudentBinding.root) {
-        val ui: ItemStudentBinding = itemStudentBinding
+    class MyViewHolder(itemStudentBinding: ItemDivisonBinding) : RecyclerView.ViewHolder(itemStudentBinding.root) {
+        val ui: ItemDivisonBinding = itemStudentBinding
 
     }
 
@@ -56,7 +63,7 @@ class StudentAdapter(var list: List<Student>, private val onItemClick: ((Student
     ): RecyclerView.ViewHolder {
 
         val holder = MyViewHolder(
-            ItemStudentBinding.inflate(
+                ItemDivisonBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
             )
@@ -66,9 +73,9 @@ class StudentAdapter(var list: List<Student>, private val onItemClick: ((Student
 //            onItemClick(list[holder.adapterPosition])
 //        }
 
-        holder.ui.container.setOnClickListener {
-            onItemClick(list[holder.adapterPosition])
-        }
+//        holder.ui.container.setOnClickListener {
+//            onItemClick(list[holder.adapterPosition])
+//        }
 
         return holder
     }
@@ -80,10 +87,18 @@ class StudentAdapter(var list: List<Student>, private val onItemClick: ((Student
 
         val data = list[holder.adapterPosition]
         holder as MyViewHolder
-        holder.ui.studentName.text = data.name
+        holder.ui.divisonName.text = data.divison.division
 
-        holder.ui.selectIcon.setImageResource(if(data.isSelected){R.drawable.ic_check_circle_24px}
-        else{R.drawable.ic_check_circle_outline_24px})
+        val childLayoutManager = LinearLayoutManager(holder.ui.rvSub.context, RecyclerView.VERTICAL, false)
+        holder.ui.rvSub.apply {
+            layoutManager = childLayoutManager
+            adapter = StudentAdapter(data.students)
+            {
+                onItemClick(it)
+            }
+            setRecycledViewPool(viewPool)
+        }
+
     }
 
 
