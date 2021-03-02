@@ -1,4 +1,4 @@
-package com.bosleo.studentapp.data.database
+package com.bosleo.studentapp.data.database.relationship
 
 import androidx.room.Embedded
 import androidx.room.Relation

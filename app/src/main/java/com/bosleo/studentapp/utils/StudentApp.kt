@@ -3,7 +3,7 @@ package com.bosleo.studentapp.utils
 import android.app.Application
 import android.content.Context
 import com.bosleo.studentapp.data.database.StudentDatabase
-import com.bosleo.studentapp.data.database.StudentDao
+import com.bosleo.studentapp.data.database.dao.StudentDao
 import com.bosleo.studentapp.data.repository.StudentRepo
 import dagger.Module
 import dagger.Provides

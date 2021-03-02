@@ -1,6 +1,5 @@
 package com.bosleo.studentapp.data.pojo
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

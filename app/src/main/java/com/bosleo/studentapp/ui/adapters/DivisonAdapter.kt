@@ -2,16 +2,12 @@ package com.bosleo.studentapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bosleo.studentapp.R
-import com.bosleo.studentapp.data.database.DivisonWithStudents
-import com.bosleo.studentapp.data.pojo.Divison
+import com.bosleo.studentapp.data.database.relationship.DivisonWithStudents
 import com.bosleo.studentapp.data.pojo.Student
 import com.bosleo.studentapp.databinding.ItemDivisonBinding
-import com.bosleo.studentapp.databinding.ItemStudentBinding
 
 
 class DivisonAdapter(var list: List<DivisonWithStudents>, private val onItemClick: ((Student) -> Unit))
@@ -62,22 +58,12 @@ class DivisonAdapter(var list: List<DivisonWithStudents>, private val onItemClic
         viewType: Int
     ): RecyclerView.ViewHolder {
 
-        val holder = MyViewHolder(
+        return MyViewHolder(
                 ItemDivisonBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
             )
         )
-
-//        holder.ui.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-//            onItemClick(list[holder.adapterPosition])
-//        }
-
-//        holder.ui.container.setOnClickListener {
-//            onItemClick(list[holder.adapterPosition])
-//        }
-
-        return holder
     }
 
     override fun onBindViewHolder(

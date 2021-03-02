@@ -3,13 +3,13 @@ package com.bosleo.studentapp.data.repository
 import androidx.lifecycle.LiveData
 import com.bosleo.studentapp.api.ApiService
 import com.bosleo.studentapp.api.RetrofitBuilder
-import com.bosleo.studentapp.data.database.DivisonWithStudents
-import com.bosleo.studentapp.data.database.StudentDao
+import com.bosleo.studentapp.data.database.relationship.DivisonWithStudents
+import com.bosleo.studentapp.data.database.dao.StudentDao
 import com.bosleo.studentapp.data.pojo.Divison
 import com.bosleo.studentapp.data.pojo.Student
 import javax.inject.Inject
 
-class StudentRepo @Inject constructor(private val studentDao: StudentDao,) {
+class StudentRepo @Inject constructor(private val studentDao: StudentDao) {
 
     suspend fun getClassData()
     {
@@ -38,10 +38,6 @@ class StudentRepo @Inject constructor(private val studentDao: StudentDao,) {
         }
 
         //return null
-    }
-
-    fun getAllStudents(): LiveData<List<Student>> {
-        return studentDao.fetch()
     }
 
     fun getAllDivisions(): LiveData<List<DivisonWithStudents>> {

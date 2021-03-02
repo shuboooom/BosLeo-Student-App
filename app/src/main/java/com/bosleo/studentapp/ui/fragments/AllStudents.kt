@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bosleo.studentapp.databinding.FragmentStudentsBinding
 import com.bosleo.studentapp.ui.adapters.DivisonAdapter
-import com.bosleo.studentapp.ui.adapters.StudentAdapter
 import com.bosleo.studentapp.utils.beGone
 import com.bosleo.studentapp.utils.beVisible
 import com.bosleo.studentapp.viewmodels.StudentViewModel
@@ -47,14 +46,15 @@ class AllStudents : Fragment() {
             binding.progressBar.beGone()
             it?.let {
                 studentList ->
-                //studentList as ArrayList
 
                 if(divisonAdapter == null){
-                    binding.list.layoutManager = LinearLayoutManager(activity)
                     divisonAdapter = DivisonAdapter(studentList) {
                         viewModel.checkUncheck(it.id,!it.isSelected)
                     }
-                    binding.list.adapter = divisonAdapter
+                    binding.list.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = divisonAdapter
+                    }
                 }
                 else
                 {

@@ -48,11 +48,13 @@ class SelectedStudents : Fragment() {
                 studentList as ArrayList
 
                 if(studentAdapter == null){
-                    binding.list.layoutManager = LinearLayoutManager(activity)
                     studentAdapter = SelectedStudentAdapter(studentList) {
                         viewModel.checkUncheck(it.id,!it.isSelected)
                     }
-                    binding.list.adapter = studentAdapter
+                    binding.list.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = studentAdapter
+                    }
                 }
                 else
                 {
